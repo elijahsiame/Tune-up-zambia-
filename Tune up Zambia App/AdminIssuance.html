@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Completion Issuance</title>
+    <style>
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 50px;
+            text-align: center;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Service Completion Issuance</h1>
+    <p>Service Report ID: <span id="serviceId">SERVICE-XYZ789</span></p>
+    <p>Car Model: Toyota Corolla</p>
+    <p>Service Type: Oil Change</p>
+    <p>Status: Completed</p>
+    <a href="service-closure.html" class="btn" onclick="saveServiceId()">Proceed to Service Closure</a>
+</div>
+<script>
+    function generateRandomServiceId() {
+        return 'SERVICE-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const serviceId = generateRandomServiceId();
+        document.getElementById('serviceId').textContent = serviceId;
+    });
+
+    function saveServiceId() {
+        const serviceId = document.getElementById('serviceId').textContent;
+        localStorage.setItem('serviceId', serviceId);
+        window.location.href = 'service-closure.html';
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Reports - Passport Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding-top: 50px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .report-summary {
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .report-summary h2 {
+      margin-bottom: 20px;
+    }
+    .report-summary p {
+      font-size: 18px;
+    }
+    .back-button {
+      margin-top: 20px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    .back-button:hover {
+      background-color: #45a049;
+    }
+    .generate-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+    .generate-button:hover {
+      background-color: #45a049;
+    }
+    .applications-details {
+      background-color: #f9f9f9;
+      padding: 10px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Generate Reports - Passport Management System</h1>
+
+  <!-- Report Filter Section -->
+  <div>
+    <button class="generate-button" onclick="generateReport('approved')">Show Approved Applications</button>
+    <button class="generate-button" onclick="generateReport('pending')">Show Pending Applications</button>
+    <button class="generate-button" onclick="generateReport('rejected')">Show Rejected Applications</button>
+  </div>
+
+  <!-- Report Summary -->
+  <div class="report-summary">
+    <h2>Report Summary</h2>
+    <p id="totalApplications">Total Applications: 0</p>
+    <p id="approvedApplications">Approved Applications: 0</p>
+    <p id="pendingApplications">Pending Applications: 0</p>
+    <p id="rejectedApplications">Rejected Applications: 0</p>
+  </div>
+
+  <!-- Applications Details Section -->
+  <div class="applications-details">
+    <h3>Application Details</h3>
+    <ul id="applicationDetailsList"></ul>
+  </div>
+
+  <!-- Back to Dashboard Button -->
+  <a href="Admin_indexcode.html" class="back-button">Back to Dashboard</a>
+</div>
+
+<script>
+  // Function to generate the report based on the selected status
+  function generateReport(status) {
+    // Retrieve applications from localStorage
+    const applications = JSON.parse(localStorage.getItem('applications')) || [];
+
+    // Filter applications by status
+    const filteredApplications = applications.filter(app => app.status === status);
+
+    // Display application details
+    const applicationDetailsList = document.getElementById('applicationDetailsList');
+    applicationDetailsList.innerHTML = '';  // Clear any previous entries
+    filteredApplications.forEach(app => {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${app.name} - ${app.status.charAt(0).toUpperCase() + app.status.slice(1)}`;
+      applicationDetailsList.appendChild(listItem);
+    });
+
+    // Update the report summary
+    const total = applications.length;
+    const approved = applications.filter(app => app.status === 'approved').length;
+    const pending = applications.filter(app => app.status === 'pending').length;
+    const rejected = applications.filter(app => app.status === 'rejected').length;
+
+    document.getElementById('totalApplications').innerText = `Total Applications: ${total}`;
+    document.getElementById('approvedApplications').innerText = `Approved Applications: ${approved}`;
+    document.getElementById('pendingApplications').innerText = `Pending Applications: ${pending}`;
+    document.getElementById('rejectedApplications').innerText = `Rejected Applications: ${rejected}`;
+  }
+
+  // Generate report on page load
+  document.addEventListener('DOMContentLoaded', () => generateReport('approved'));
+</script>
+
+</body>
+</html>

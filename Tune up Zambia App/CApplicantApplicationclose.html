@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Close Service Request</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          margin: 0;
+          padding: 0;
+        }
+        .container {
+          width: 80%;
+          margin: 50px auto;
+          padding: 20px;
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+          text-align: center;
+        }
+        h1 {
+          color: #333;
+        }
+        .status-message {
+          font-size: 18px;
+          margin: 20px 0;
+          color: #555;
+        }
+        .close-btn {
+          display: inline-block;
+          margin-top: 20px;
+          padding: 12px 20px;
+          background-color: #e74c3c;
+          color: white;
+          font-size: 16px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        .close-btn:hover {
+          background-color: #c0392b;
+        }
+        .success-message {
+          display: none;
+          color: green;
+          font-size: 18px;
+          margin-top: 20px;
+        }
+    </style>
+    <script>
+        function closeServiceRequest() {
+          document.getElementById('statusMessage').textContent = 'Closing request...';
+          setTimeout(() => {
+            document.getElementById('statusMessage').textContent = '';
+            document.getElementById('successMessage').style.display = 'block';
+          }, 2000);
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>Close Service Request</h1>
+    <p class="status-message" id="statusMessage">Are you sure you want to close this service request?</p>
+    <button class="close-btn" onclick="closeServiceRequest()">Close Request</button>
+    <p class="success-message" id="successMessage">The service request has been successfully closed!</p>
+</div>
+</body>
+</html>

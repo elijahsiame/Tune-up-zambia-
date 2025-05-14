@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Car Maintenance Status</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          margin: 0;
+          padding: 0;
+        }
+        .container {
+          width: 80%;
+          margin: 50px auto;
+          padding: 20px;
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+          text-align: center;
+          color: #333;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+        }
+        th, td {
+          padding: 12px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+        }
+        th {
+          background-color: #4CAF50;
+          color: white;
+        }
+        .status {
+          display: inline-block;
+          padding: 5px 10px;
+          border-radius: 5px;
+          color: white;
+        }
+        .pending { background-color: #f39c12; }
+        .in-progress { background-color: #3498db; }
+        .completed { background-color: #2ecc71; }
+    </style>
+    <script>
+        function fetchStatusUpdates() {
+          // Simulating fetching data from the server
+          const updates = [
+            { id: 1, status: "In Progress" },
+            { id: 2, status: "Completed" }
+          ];
+
+          updates.forEach(update => {
+            let statusElement = document.getElementById(`status-${update.id}`);
+            if (statusElement) {
+              statusElement.textContent = update.status;
+              statusElement.className = `status ${update.status.toLowerCase().replace(/ /g, '-')}`;
+            }
+          });
+        }
+
+        setInterval(fetchStatusUpdates, 5000); // Auto-update every 5 seconds
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>Track Car Maintenance Status</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Car Model</th>
+            <th>Service Type</th>
+            <th>Status</th>
+            <th>Estimated Completion</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>John Doe</td>
+            <td>Toyota Corolla</td>
+            <td>Oil Change</td>
+            <td><span id="status-1" class="status pending">Pending</span></td>
+            <td>March 5, 2024</td>
+        </tr>
+        <tr>
+            <td>Jane Smith</td>
+            <td>Honda Civic</td>
+            <td>Brake Service</td>
+            <td><span id="status-2" class="status in-progress">In Progress</span></td>
+            <td>March 6, 2025</td>
+        </tr>
+        <tr>
+            <td>Robert Brown</td>
+            <td>Ford Focus</td>
+            <td>Engine Repair</td>
+            <td><span id="status-3" class="status completed">Completed</span></td>
+            <td>March 3, 2025</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

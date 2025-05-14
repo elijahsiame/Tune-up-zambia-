@@ -1,0 +1,14 @@
+{
+  "name": "vendor_name/Passport Registration and production system",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "ELIJAHSIAME",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+  }
+}

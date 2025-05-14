@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Closure</title>
+    <style>
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 50px;
+            text-align: center;
+        }
+        .closure-details {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        .closure-details h2 {
+            margin-top: 0;
+        }
+        .closure-details p {
+            font-size: 16px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        .success {
+            color: green;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Service Closure</h1>
+    <div class="closure-details" id="closureDetails">
+        <h2>Service Finalization Information</h2>
+        <p><strong>Customer Name:</strong> <span id="customerName">John Doe</span></p>
+        <p><strong>Service Report ID:</strong> <span id="serviceId">Loading...</span></p>
+        <p><strong>Car Model:</strong> Toyota Corolla</p>
+        <p><strong>Service Type:</strong> Oil Change</p>
+        <p><strong>Status:</strong> <span id="serviceStatus">Completed</span></p>
+    </div>
+    <div id="closureActionSection">
+        <button class="btn" onclick="closeService()">Close Service</button>
+    </div>
+    <div id="closureError" class="error"></div>
+    <div id="closureSuccess" class="success"></div>
+</div>
+<script>
+    const savedServiceId = localStorage.getItem('serviceId');
+    if (savedServiceId) {
+        document.getElementById('serviceId').textContent = savedServiceId;
+    } else {
+        document.getElementById('serviceId').textContent = "Service ID not found!";
+        console.error("Service ID not found in localStorage.");
+    }
+
+    const serviceData = {
+        customerName: "John Doe",
+        serviceId: savedServiceId || "Unknown",
+        status: "Completed"
+    };
+
+    function closeService() {
+        const closureError = document.getElementById('closureError');
+        const closureSuccess = document.getElementById('closureSuccess');
+        closureError.textContent = '';
+        closureSuccess.textContent = '';
+
+        if (serviceData.status === "Completed") {
+            serviceData.status = "Closed";
+            document.getElementById('serviceStatus').textContent = serviceData.status;
+            closureSuccess.textContent = "The service request has been successfully closed!";
+        } else {
+            closureError.textContent = "Error: Service is not in a valid state to be closed.";
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User & Admin Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        .login-container h2            margin-bottom: 20px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .login-button:hover {
+            background-color: #45a049;
+        }
+        .toggle-link {
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .toggle-link:hover {
+            text-decoration: underline;
+        }
+        .login-form {
+            display: none;
+        }
+        .active-form {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+
+    <!-- User Login Form -->
+    <div id="user-login" class="login-form active-form">
+        <h3></h3>
+        <form onsubmit="userLogin(event)">
+            <input type="text" id="user-username" class="input-field" placeholder="Username" required><br>
+            <input type="password" id="user-password" class="input-field" placeholder="Password" required><br>
+            <button type="submit" class="login-button">Login as User</button>
+        </form>
+        <span class="toggle-link" onclick="toggleForm('admin-login')">Admin Login</span>
+    </div>
+
+    <!-- Admin Login Form -->
+    <div id="admin-login" class="login-form">
+        <h3></h3>
+        <form onsubmit="adminLogin(event)">
+            <input type="text" id="admin-username" class="input-field" placeholder="Username" required><br>
+            <input type="password" id="admin-password" class="input-field" placeholder="Password" required><br>
+            <button type="submit" class="login-button">Login as Admin</button>
+        </form>
+        <span class="toggle-link" onclick="toggleForm('user-login')">User Login</span>
+    </div>
+</div>
+
+<script>
+    // Dummy registered users (In a real-world app, use a backend service)
+    const registeredUsers = [
+        { username: 'user1', password: 'password1' },
+        { username: 'user2', password: 'password2' },
+        { username: 'user3', password: 'password3' },
+        { username: 'user4', password: 'password4' },
+        { username: 'user5', password: 'password5' },
+        { username: 'user6', password: 'password6' },
+        { username: 'user7', password: 'password7' },
+        { username: 'user8', password: 'password8' },
+        { username: 'user9', password: 'password9' },
+        { username: 'user10', password: 'password10' },
+        { username: 'user11', password: 'password11' },
+        { username: 'user12', password: 'password12' },
+        { username: 'user13', password: 'password13' },
+        { username: 'user14', password: 'password14' },
+        { username: 'user15', password: 'password15' },
+        { username: 'user16', password: 'password16' },
+        { username: 'user17', password: 'password17' },
+        { username: 'user18', password: 'password18' },
+        { username: 'user19', password: 'password19' },
+        { username: 'user20', password: 'password20' },
+        { username: 'user21', password: 'password21' },
+        { username: 'user22', password: 'password22' },
+        { username: 'user23', password: 'password23' },
+        { username: 'user24', password: 'password24' },
+        { username: 'user25', password: 'password25' },
+        { username: 'user26', password: 'password26' },
+        { username: 'user27', password: 'password27' },
+        { username: 'user28', password: 'password28' },
+        { username: 'user29', password: 'password29' },
+        { username: 'user30', password: 'password30' },
+        { username: 'user31', password: 'password31' },
+        { username: 'user32', password: 'password32' },
+        { username: 'user33', password: 'password33' },
+        { username: 'user34', password: 'password34' },
+        { username: 'user35', password: 'password35' },
+        { username: 'user36', password: 'password36' },
+        { username: 'user37', password: 'password37' },
+        { username: 'user38', password: 'password38' },
+        { username: 'user39', password: 'password39' },
+        { username: 'user40', password: 'password40' },
+        { username: 'user41', password: 'password41' },
+        { username: 'user42', password: 'password42' },
+        { username: 'user43', password: 'password43' },
+        { username: 'user44', password: 'password44' },
+        { username: 'user45', password: 'password45' },
+        { username: 'user46', password: 'password46' },
+        { username: 'user47', password: 'password47' },
+        { username: 'user48', password: 'password48' },
+        { username: 'user49', password: 'password49' },
+        { username: 'user50', password: 'password50' },
+        { username: 'user51', password: 'password51' },
+        { username: 'user52', password: 'password52' },
+        { username: 'user53', password: 'password53' },
+        { username: 'user54', password: 'password54' },
+        { username: 'user55', password: 'password55' },
+        { username: 'user56', password: 'password56' },
+        { username: 'user57', password: 'password57' },
+        { username: 'user58', password: 'password58' },
+        { username: 'user59', password: 'password59' },
+        { username: 'user60', password: 'password60' },
+        { username: 'user61', password: 'password61' },
+        { username: 'user62', password: 'password62' },
+        { username: 'user63', password: 'password63' },
+        { username: 'user64', password: 'password64' },
+        { username: 'user65', password: 'password65' },
+        { username: 'user66', password: 'password66' },
+        { username: 'user67', password: 'password67' },
+        { username: 'user68', password: 'password68' },
+        { username: 'user69', password: 'password69' },
+        { username: 'user70', password: 'password70' },
+        { username: 'user71', password: 'password71' },
+        { username: 'user72', password: 'password72' },
+        { username: 'user73', password: 'password73' },
+        { username: 'user74', password: 'password74' },
+        { username: 'user75', password: 'password75' },
+        { username: 'user76', password: 'password76' },
+        { username: 'user77', password: 'password77' },
+        { username: 'user78', password: 'password78' },
+        { username: 'user79', password: 'password79' },
+        { username: 'user80', password: 'password80' },
+        { username: 'user81', password: 'password81' },
+        { username: 'user82', password: 'password82' },
+        { username: 'user83', password: 'password83' },
+        { username: 'user84', password: 'password84' },
+        { username: 'user85', password: 'password85' },
+        { username: 'user86', password: 'password86' },
+        { username: 'user87', password: 'password87' },
+        { username: 'user88', password: 'password88' },
+        { username: 'user89', password: 'password89' },
+        { username: 'user90', password: 'password90' },
+        { username: 'user91', password: 'password91' },
+        { username: 'user92', password: 'password92' },
+        { username: 'user93', password: 'password93' },
+        { username: 'user94', password: 'password94' },
+        { username: 'user95', password: 'password95' },
+        { username: 'user96', password: 'password96' },
+        { username: 'user97', password: 'password97' },
+        { username: 'user98', password: 'password98' },
+        { username: 'user99', password: 'password99' },
+        { username: 'user100', password: 'password100' },
+    ];
+    const registeredAdmins = [
+        { username: 'admin1', password: 'adminpass1' },
+        { username: 'admin2', password: 'adminpass2' },
+        { username: 'admin3', password: 'adminpass3' },
+        { username: 'admin4', password: 'adminpass4' },
+        { username: 'admin5', password: 'adminpass5' },
+        { username: 'admin6', password: 'adminpass6' },
+        { username: 'admin7', password: 'adminpass7' },
+        { username: 'admin8', password: 'adminpass8' },
+        { username: 'admin9', password: 'adminpass9' },
+        { username: 'admin10', password: 'adminpass10' },
+        { username: 'admin11', password: 'adminpass11' },
+        { username: 'admin12', password: 'adminpass12' },
+        { username: 'admin13', password: 'adminpass13' },
+        { username: 'admin14', password: 'adminpass14' },
+        { username: 'admin15', password: 'adminpass15' },
+        { username: 'admin16', password: 'adminpass16' },
+        { username: 'admin17', password: 'adminpass17' },
+        { username: 'admin18', password: 'adminpass18' },
+        { username: 'admin19', password: 'adminpass19' },
+        { username: 'admin20', password: 'adminpass20' },
+        { username: 'admin21', password: 'adminpass21' },
+        { username: 'admin22', password: 'adminpass22' },
+        { username: 'admin23', password: 'adminpass23' },
+        { username: 'admin24', password: 'adminpass24' },
+        { username: 'admin25', password: 'adminpass25' },
+        { username: 'admin26', password: 'adminpass26' },
+        { username: 'admin27', password: 'adminpass27' },
+        { username: 'admin28', password: 'adminpass28' },
+        { username: 'admin29', password: 'adminpass29' },
+        { username: 'admin30', password: 'adminpass30' },
+        { username: 'admin31', password: 'adminpass31' },
+        { username: 'admin32', password: 'adminpass32' },
+        { username: 'admin33', password: 'adminpass33' },
+        { username: 'admin34', password: 'adminpass34' },
+        { username: 'admin35', password: 'adminpass35' },
+        { username: 'admin36', password: 'adminpass36' },
+        { username: 'admin37', password: 'adminpass37' },
+        { username: 'admin38', password: 'adminpass38' },
+        { username: 'admin39', password: 'adminpass39' },
+        { username: 'admin40', password: 'adminpass40' },
+        { username: 'admin41', password: 'adminpass41' },
+        { username: 'admin42', password: 'adminpass42' },
+        { username: 'admin43', password: 'adminpass43' },
+        { username: 'admin44', password: 'adminpass44' },
+        { username: 'admin45', password: 'adminpass45' },
+        { username: 'admin46', password: 'adminpass46' },
+        { username: 'admin47', password: 'adminpass47' },
+        { username: 'admin48', password: 'adminpass48' },
+        { username: 'admin49', password: 'adminpass49' },
+        { username: 'admin50', password: 'adminpass50' },
+        { username: 'admin51', password: 'adminpass51' },
+        { username: 'admin52', password: 'adminpass52' },
+        { username: 'admin53', password: 'adminpass53' },
+        { username: 'admin54', password: 'adminpass54' },
+        { username: 'admin55', password: 'adminpass55' },
+        { username: 'admin56', password: 'adminpass56' },
+        { username: 'admin57', password: 'adminpass57' },
+        { username: 'admin58', password: 'adminpass58' },
+        { username: 'admin59', password: 'adminpass59' },
+        { username: 'admin60', password: 'adminpass60' },
+        { username: 'admin61', password: 'adminpass61' },
+        { username: 'admin62', password: 'adminpass62' },
+        { username: 'admin63', password: 'adminpass63' },
+        { username: 'admin64', password: 'adminpass64' },
+        { username: 'admin65', password: 'adminpass65' },
+        { username: 'admin66', password: 'adminpass66' },
+        { username: 'admin67', password: 'adminpass67' },
+        { username: 'admin68', password: 'adminpass68' },
+        { username: 'admin69', password: 'adminpass69' },
+        { username: 'admin70', password: 'adminpass70' },
+        { username: 'admin71', password: 'adminpass71' },
+        { username: 'admin72', password: 'adminpass72' },
+        { username: 'admin73', password: 'adminpass73' },
+        { username: 'admin74', password: 'adminpass74' },
+        { username: 'admin75', password: 'adminpass75' },
+        { username: 'admin76', password: 'adminpass76' },
+        { username: 'admin77', password: 'adminpass77' },
+        { username: 'admin78', password: 'adminpass78' },
+        { username: 'admin79', password: 'adminpass79' },
+        { username: 'admin80', password: 'adminpass80' },
+        { username: 'admin81', password: 'adminpass81' },
+        { username: 'admin82', password: 'adminpass82' },
+        { username: 'admin83', password: 'adminpass83' },
+        { username: 'admin84', password: 'adminpass84' },
+        { username: 'admin85', password: 'adminpass85' },
+        { username: 'admin86', password: 'adminpass86' },
+        { username: 'admin87', password: 'adminpass87' },
+        { username: 'admin88', password: 'adminpass88' },
+        { username: 'admin89', password: 'adminpass89' },
+        { username: 'admin90', password: 'adminpass90' },
+        { username: 'admin91', password: 'adminpass91' },
+        { username: 'admin92', password: 'adminpass92' },
+        { username: 'admin93', password: 'adminpass93' },
+        { username: 'admin94', password: 'adminpass94' },
+        { username: 'admin95', password: 'adminpass95' },
+        { username: 'admin96', password: 'adminpass96' },
+        { username: 'admin97', password: 'adminpass97' },
+        { username: 'admin98', password: 'adminpass98' },
+        { username: 'admin99', password: 'adminpass99' },
+        { username: 'admin100', password: 'adminpass100' },
+        { username: 'admin101', password: 'adminpass101' },
+        { username: 'admin102', password: 'adminpass102' },
+        { username: 'admin103', password: 'adminpass103' },
+        { username: 'admin104', password: 'adminpass104' },
+        { username: 'admin105', password: 'adminpass105' },
+        { username: 'admin106', password: 'adminpass106' },
+        { username: 'admin107', password: 'adminpass107' },
+        { username: 'admin108', password: 'adminpass108' },
+        { username: 'admin109', password: 'adminpass109' },
+        { username: 'admin110', password: 'adminpass110' },
+        { username: 'admin111', password: 'adminpass111' },
+        { username: 'admin112', password: 'adminpass112' },
+        { username: 'admin113', password: 'adminpass113' },
+        { username: 'admin114', password: 'adminpass114' },
+        { username: 'admin115', password: 'adminpass115' },
+        { username: 'admin116', password: 'adminpass116' },
+        { username: 'admin117', password: 'adminpass117' },
+        { username: 'admin118', password: 'adminpass118' },
+        { username: 'admin119', password: 'adminpass119' },
+        { username: 'admin120', password: 'adminpass120' },
+        { username: 'admin121', password: 'adminpass121' },
+        { username: 'admin122', password: 'adminpass122' },
+        { username: 'admin123', password: 'adminpass123' },
+        { username: 'admin124', password: 'adminpass124' },
+        { username: 'admin125', password: 'adminpass125' },
+        { username: 'admin126', password: 'adminpass126' },
+        { username: 'admin127', password: 'adminpass127' },
+        { username: 'admin128', password: 'adminpass128' },
+        { username: 'admin129', password: 'adminpass129' },
+        { username: 'admin130', password: 'adminpass130' },
+        { username: 'admin131', password: 'adminpass131' },
+        { username: 'admin132', password: 'adminpass132' },
+        { username: 'admin133', password: 'adminpass133' },
+        { username: 'admin134', password: 'adminpass134' },
+        { username: 'admin135', password: 'adminpass135' },
+        { username: 'admin136', password: 'adminpass136' },
+        { username: 'admin137', password: 'adminpass137' },
+        { username: 'admin138', password: 'adminpass138' },
+        { username: 'admin139', password: 'adminpass139' },
+        { username: 'admin140', password: 'adminpass140' }
+    ];
+
+    // Function to toggle between User and Admin login forms
+    function toggleForm(form) {
+        const userForm = document.getElementById('user-login');
+        const adminForm = document.getElementById('admin-login');
+
+        if (form === 'user-login') {
+            userForm.classList.add('active-form');
+            adminForm.classList.remove('active-form');
+        } else if (form === 'admin-login') {
+            adminForm.classList.add('active-form');
+            userForm.classList.remove('active-form');
+        }
+    }
+
+    // User Login Submission
+    function userLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById('user-username').value;
+        const password = document.getElementById('user-password').value;
+
+        // Find the user in the registered users list
+        const user = registeredUsers.find(user => user.username === username && user.password === password);
+
+        if (user) {
+            alert(`Logged in as User: ${username}`);
+            // Redirect to Applicant_indexcode.html page after successful login
+            window.location.href = 'Applicant_indexcode.html'; // Redirect to Applicant index page
+        } else {
+            alert('You are not registered as a User. Redirecting to sign-up page...');
+            // Redirect to the sign-up page if not registered
+            window.location.href = 'applicant registration(sign_up).html'; // Redirect to sign-up page
+        }
+    }
+
+    // Admin Login Submission
+    function adminLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById('admin-username').value;
+        const password = document.getElementById('admin-password').value;
+
+        // Find the admin in the registered admins list
+        const admin = registeredAdmins.find(admin => admin.username === username && admin.password === password);
+
+        if (admin) {
+            alert(`Logged in as Admin: ${username}`);
+            // Redirect to Admin_indexcode.html page after successful login
+            window.location.href = 'Admin_indexcode.html'; // Redirect to Admin index page
+        } else {
+            alert('You are not registered as an Admin. Redirecting to sign-up page...');
+            // Redirect to the sign-up page if not registered
+            window.location.href = 'applicant registration(sign_up).html'; // Redirect to sign-up page
+        }
+    }
+</script>
+
+</body>
+</html>

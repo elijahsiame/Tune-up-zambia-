@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Maintenance System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .steps-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .step {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .step:hover {
+            transform: scale(1.05);
+        }
+        .step a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .step .description {
+            margin-top: 15px;
+            color: #777;
+        }
+        .step .icon {
+            font-size: 40px;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Car Maintenance System - Admin Dashboard</h1>
+
+    <div class="steps-container">
+        <div class="step">
+            <div class="icon">📋</div>
+            <h2>View Service Requests</h2>
+            <p class="description">Check all pending and completed car maintenance requests.</p>
+            <a href="AdminStatus_tracker.html">Go to Service Requests</a>
+        </div>
+
+        <div class="step">
+            <div class="icon">🔧</div>
+            <h2>Approve & Assign Maintenance</h2>
+            <p class="description">Approve service requests and assign mechanics.</p>
+            <a href="AdminApplication%20Review%20and%20Approval.html">Manage Maintenance</a>
+        </div>
+
+        <div class="step">
+            <div class="icon">📝</div>
+            <h2>Issue Service Reports</h2>
+            <p class="description">Generate reports for completed vehicle maintenance.</p>
+            <a href="AdminIssuance.html">Generate Reports</a>
+        </div>
+
+        <div class="step">
+            <div class="icon">🔒</div>
+            <h2>Close Completed Services</h2>
+            <p class="description">Finalize completed maintenance records.</p>
+            <a href="AdminApplication%20closure.html">Close Services</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

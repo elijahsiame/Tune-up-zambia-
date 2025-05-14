@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications - Passport Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: white;
+        }
+        .approved {
+            background-color: green;
+        }
+        .pending {
+            background-color: orange;
+        }
+        .rejected {
+            background-color: red;
+        }
+        .back-button {
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .back-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Applications Status</h1>
+
+    <!-- Table to display applications -->
+    <table>
+        <thead>
+        <tr>
+            <th>Applicant Name</th>
+            <th>Application Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="applicationsList">
+        <!-- Dynamic content will be inserted here via JavaScript -->
+        </tbody>
+    </table>
+
+    <!-- Back to Dashboard Button -->
+    <a href="Applicant_indexcode.html" class="back-button">Back to Dashboard</a>
+
+</div>
+
+<script>
+    // Simulating applications data
+    const applications = [
+        { name: 'Jane Smith', date: '2024-12-13', status: 'pending' },
+
+    ];
+
+    // Function to render applications
+    function renderApplications() {
+        const applicationsList = document.getElementById('applicationsList');
+        applicationsList.innerHTML = ''; // Clear any existing content
+
+        applications.forEach(app => {
+            // Create row element for each application
+            const row = document.createElement('tr');
+
+            // Insert name, date, status and action for each application
+            row.innerHTML = `
+      <td>${app.name}</td>
+      <td>${app.date}</td>
+      <td>
+        <span class="status ${app.status}">${app.status.charAt(0).toUpperCase() + app.status.slice(1)}</span>
+      </td>
+      <td>
+        <button onclick="viewDetails('${app.name}')">View Details</button>
+      </td>
+    `;
+
+            // Append the row to the table
+            applicationsList.appendChild(row);
+        });
+    }
+
+    // Function to view details (placeholder)
+    function viewDetails(name) {
+        alert(`Viewing details for ${name}`);
+        // You can later link this to a detailed page for the specific application
+    }
+
+    // Initial call to render applications
+    renderApplications();
+</script>
+
+</body>
+</html>

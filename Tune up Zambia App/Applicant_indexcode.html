@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Maintenance System - Customer Dashboard</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        padding-top: 50px;
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    .steps-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .step {
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        padding: 20px;
+        border-radius: 8px;
+        width: 250px;
+        text-align: center;
+        transition: transform 0.3s;
+    }
+    .step:hover {
+        transform: scale(1.05);
+    }
+    .step a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .step .description {
+        margin-top: 15px;
+        color: #777;
+    }
+    .step .icon {
+        font-size: 40px;
+        color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Car Maintenance System - Customer Dashboard</h1>
+
+  <div class="steps-container">
+    <div class="step">
+      <div class="icon">🚗</div>
+      <h2>Request Maintenance</h2>
+      <p class="description">Submit a request for car maintenance and repair.</p>
+      <a href="Applicant_carform.html">Submit Request</a>
+    </div>
+
+    <div class="step">
+      <div class="icon">💰</div>
+      <h2>Make a Payment</h2>
+      <p class="description">Complete payment for maintenance services.</p>
+      <a href="ApplicatePayment_method.html">Proceed to Payment</a>
+    </div>
+
+    <div class="step">
+      <div class="icon">📊</div>
+      <h2>Track Service Status</h2>
+      <p class="description">Check the current status of your maintenance request.</p>
+      <a href="ApplicantTrackstatus.html">Track Status</a>
+    </div>
+
+    <div class="step">
+      <div class="icon">📜</div>
+      <h2>View Service Reports</h2>
+      <p class="description">Download and review completed service reports.</p>
+      <a href="Applicantviewservicereports.html">View Reports</a>
+    </div>
+
+    <div class="step">
+      <div class="icon">🔒</div>
+      <h2>Close Request</h2>
+      <p class="description">Mark your service request as completed.</p>
+      <a href="CApplicantApplicationclose.html">Close Request</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

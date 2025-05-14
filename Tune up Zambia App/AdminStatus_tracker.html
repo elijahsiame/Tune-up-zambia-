@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Maintenance Status Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaeaea;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        td {
+            background-color: #f9f9f9;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .requested {
+            background-color: #2196F3;
+            color: white;
+        }
+        .in-progress {
+            background-color: #FF9800;
+            color: white;
+        }
+        .completed {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+        }
+        .progress {
+            height: 100%;
+            border-radius: 5px;
+        }
+        button {
+            padding: 6px 12px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+            font-size: 14px;
+        }
+        .request-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+        .progress-btn {
+            background-color: #FF9800;
+            color: white;
+        }
+        .complete-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Car Maintenance Status Tracker</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Car Model</th>
+            <th>Service Type</th>
+            <th>Status</th>
+            <th>Date Requested</th>
+            <th>Estimated Completion</th>
+            <th>Progress</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="row1">
+            <td>John Doe</td>
+            <td>Toyota Corolla</td>
+            <td>Oil Change</td>
+            <td><span class="status requested" id="status1">Requested</span></td>
+            <td>March 1, 2024</td>
+            <td>March 5, 2024</td>
+            <td>
+                <div class="progress-bar">
+                    <div class="progress" id="progress1" style="width: 20%; background-color: #2196F3;"></div>
+                </div>
+            </td>
+            <td>
+                <button class="progress-btn" onclick="updateStatus('status1', 'progress1', 50, 'In Progress')">Start Service</button>
+                <button class="complete-btn" onclick="updateStatus('status1', 'progress1', 100, 'Completed')">Complete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function updateStatus(statusId, progressId, progressPercentage, newStatus) {
+        var statusElement = document.getElementById(statusId);
+        statusElement.textContent = newStatus;
+
+        switch (newStatus) {
+            case 'Requested':
+                statusElement.className = 'status requested';
+                break;
+            case 'In Progress':
+                statusElement.className = 'status in-progress';
+                break;
+            case 'Completed':
+                statusElement.className = 'status completed';
+                break;
+        }
+
+        var progressElement = document.getElementById(progressId);
+        progressElement.style.width = progressPercentage + '%';
+
+        if (newStatus === 'Requested') {
+            progressElement.style.backgroundColor = '#2196F3';
+        } else if (newStatus === 'In Progress') {
+            progressElement.style.backgroundColor = '#FF9800';
+        } else if (newStatus === 'Completed') {
+            progressElement.style.backgroundColor = '#4CAF50';
+        }
+    }
+</script>
+</body>
+</html>

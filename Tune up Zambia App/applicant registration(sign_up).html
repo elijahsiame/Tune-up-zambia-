@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicant Registration</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<h2>Applicant Registration</h2>
+<form id="registerForm">
+    <label for="Username">Username:</label>
+    <input type="text" id="Username" name="Username" required><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
+
+    <button type="submit">Register</button>
+
+</form>
+
+<p id="message"></p> <!-- This is where the success or try again message will appear -->
+
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form from submitting the traditional way
+
+        // Get form values
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const messageElement = document.getElementById('message'); // Element where we show the message
+
+        // Check if passwords match
+        if (password === confirmPassword) {
+            // Display success message
+            messageElement.textContent = "Registration Successful!";
+            messageElement.style.color = "green";  // Optional: make the success message green
+            messageElement.style.fontWeight = "bold";
+
+            // Redirect to login page after a short delay (2 seconds for example)
+            setTimeout(() => {
+                window.location.href = 'login.html'; // Redirect to login page
+            }, 2000);
+        } else {
+            // Display try again message
+            messageElement.textContent = "Passwords do not match. Please try again.";
+            messageElement.style.color = "red";  // Optional: make the error message red
+            messageElement.style.fontWeight = "bold";
+        }
+    });
+</script>
+
+</body>
+</html>

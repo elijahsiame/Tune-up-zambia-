@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .register-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      text-align: center;
+    }
+    .register-container h2 {
+      margin-bottom: 20px;
+    }
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .register-button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .register-button:hover {
+      background-color: #45a049;
+    }
+    .toggle-link {
+      margin-top: 15px;
+      color: #007bff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .toggle-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="register-container">
+  <h2>Admin Registration</h2>
+
+  <!-- Admin Registration Form -->
+  <form onsubmit="adminRegister(event)">
+    <input type="text" id="admin-username" class="input-field" placeholder="Username" required><br>
+    <input type="password" id="admin-password" class="input-field" placeholder="Password" required><br>
+    <input type="password" id="admin-confirm-password" class="input-field" placeholder="Confirm Password" required><br>
+    <button type="submit" class="register-button">Register as Admin</button>
+  </form>
+
+  <span class="toggle-link" onclick="redirectToLogin()">Already have an account? Login</span>
+</div>
+
+<script>
+  // Array to simulate registered admins (in a real application, you'd use a backend database)
+  const registeredAdmins = [];
+
+  // Admin Registration function
+  function adminRegister(event) {
+    event.preventDefault(); // Prevent form submission
+
+    const username = document.getElementById('admin-username').value;
+    const password = document.getElementById('admin-password').value;
+    const confirmPassword = document.getElementById('admin-confirm-password').value;
+
+    // Check if the username already exists
+    const adminExists = registeredAdmins.some(admin => admin.username === username);
+
+    if (adminExists) {
+      alert('This username is already taken. Please choose another one.');
+      return;
+    }
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      alert('Passwords do not match. Please try again.');
+      return;
+    }
+
+    // Add the new admin to the registeredAdmins array
+    registeredAdmins.push({ username, password });
+
+    // Redirect to success page
+    window.location.href = 'registration-success.html'; // Redirect to success page
+  }
+
+  // Function to redirect to the login page
+  function redirectToLogin() {
+    window.location.href = 'login.html'; // Redirect to login page
+  }
+</script>
+
+</body>
+</html>
